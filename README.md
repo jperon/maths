@@ -1,4 +1,4 @@
 maths
 =====
 
-Scripts python pour me faciliter la vie dans mes cours de Mathématiques.
+Scripts python servant à calculer ce que leur nom indique.
