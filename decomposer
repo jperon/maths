@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import sys,math
+
+def decomposer(n):
+    i = 2
+    diviseurspremiers = []
+    while i <= n:
+        while n > 0 and n%i == 0:
+            diviseurspremiers.append(i)
+            n = n/i
+        i += 1
+    return diviseurspremiers
+
+if __name__ == '__main__':
+	print(decomposer(int(sys.argv[1])))
