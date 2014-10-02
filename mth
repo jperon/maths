@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+
+import sys as s
+import math as m
+
+def decomposer(n):
+    i = 2
+    diviseurspremiers = []
+    while i <= n:
+        while n > 0 and n%i == 0:
+            diviseurspremiers.append(i)
+            n = n/i
+        i += 1
+    return diviseurspremiers
+
+def diviseurs(n):
+    liste = [d for d in range(1,int(m.sqrt(n))) if n%d == 0]
+    liste += [int(n/d) for d in liste]
+    liste.sort()
+    return liste
+
+def factorielle(n):
+    f = 1
+    for i in range(2,n):
+        f = f * i
+    return f
+
+def pgcd(a,b):
+	r = a%b
+	if r == 0:
+		return b
+	else:
+		return pgcd(b,r)
+
+def calc_pgcd(args):
+    a = int(args[0])
+    for b in args[0:]:
+        a = pgcd(a,int(b))
+    return a
+
+def ppcm(a,b):
+	return int(a * b / pgcd(a,b))
+
+def calc_ppcm(args):
+    a = int(args[0])
+    for b in args[1:]:
+        a = ppcm(a,int(b))
+    return a
+
+
+
+if __name__ == '__main__':
+    try:
+        a = int(s.argv[2])
+        print(
+                {
+                'cos':            m.cos(m.pi/180*a),
+                'sin':            m.sin(m.pi/180*a),
+                'tan':            m.tan(m.pi/180*a),
+                'decomposer':     decomposer(a),
+                'diviseurs':      diviseurs(a),
+                'factorielle':    factorielle(a),
+                'pgcd':           calc_pgcd(s.argv[2:]),
+                'ppcm':           calc_ppcm(s.argv[2:]),
+                }[s.argv[1]]
+            )
+    except IndexError: s.stderr.write('Argument manquant.\n')
